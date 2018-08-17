@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.worstezreal.rediscache.dao.GjjCityDao">
+    <resultMap id="BaseResultMap" type="com.worstezreal.rediscache.entity.GjjCity">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="center_name" jdbcType="VARCHAR" property="centerName"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="koala_id" jdbcType="VARCHAR" property="koalaId"/>
+        <result column="fiveone_id" jdbcType="VARCHAR" property="fiveoneId"/>
+        <result column="enable" jdbcType="TINYINT" property="enable"/>
+        <result column="channel" jdbcType="VARCHAR" property="channel"/>
+        <result column="task_type" jdbcType="VARCHAR" property="taskType"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, center_name, city, koala_id, fiveone_id, enable, channel, task_type
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from gjj_city
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM gjj_city
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.worstezreal.rediscache.entity.GjjCity">
+        INSERT INTO gjj_city (id, center_name, city,
+                              koala_id, fiveone_id, enable,
+                              channel, task_type)
+        VALUES (#{id,jdbcType=INTEGER}, #{centerName,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
+                #{koalaId,jdbcType=VARCHAR}, #{fiveoneId,jdbcType=VARCHAR}, #{enable,jdbcType=TINYINT},
+                #{channel,jdbcType=VARCHAR}, #{taskType,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.worstezreal.rediscache.entity.GjjCity">
+        insert into gjj_city
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="centerName != null">
+                center_name,
+            </if>
+            <if test="city != null">
+                city,
+            </if>
+            <if test="koalaId != null">
+                koala_id,
+            </if>
+            <if test="fiveoneId != null">
+                fiveone_id,
+            </if>
+            <if test="enable != null">
+                enable,
+            </if>
+            <if test="channel != null">
+                channel,
+            </if>
+            <if test="taskType != null">
+                task_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="centerName != null">
+                #{centerName,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null">
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="koalaId != null">
+                #{koalaId,jdbcType=VARCHAR},
+            </if>
+            <if test="fiveoneId != null">
+                #{fiveoneId,jdbcType=VARCHAR},
+            </if>
+            <if test="enable != null">
+                #{enable,jdbcType=TINYINT},
+            </if>
+            <if test="channel != null">
+                #{channel,jdbcType=VARCHAR},
+            </if>
+            <if test="taskType != null">
+                #{taskType,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.worstezreal.rediscache.entity.GjjCity">
+        update gjj_city
+        <set>
+            <if test="centerName != null">
+                center_name = #{centerName,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null">
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="koalaId != null">
+                koala_id = #{koalaId,jdbcType=VARCHAR},
+            </if>
+            <if test="fiveoneId != null">
+                fiveone_id = #{fiveoneId,jdbcType=VARCHAR},
+            </if>
+            <if test="enable != null">
+                enable = #{enable,jdbcType=TINYINT},
+            </if>
+            <if test="channel != null">
+                channel = #{channel,jdbcType=VARCHAR},
+            </if>
+            <if test="taskType != null">
+                task_type = #{taskType,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.worstezreal.rediscache.entity.GjjCity">
+        UPDATE gjj_city
+        SET center_name = #{centerName,jdbcType=VARCHAR},
+            city        = #{city,jdbcType=VARCHAR},
+            koala_id    = #{koalaId,jdbcType=VARCHAR},
+            fiveone_id  = #{fiveoneId,jdbcType=VARCHAR},
+            enable      = #{enable,jdbcType=TINYINT},
+            channel     = #{channel,jdbcType=VARCHAR},
+            task_type   = #{taskType,jdbcType=VARCHAR}
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="getCityConfig" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from gjj_city
+        <where>
+            <if test="taskType != null">
+                task_type = #{taskType,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+</mapper>
